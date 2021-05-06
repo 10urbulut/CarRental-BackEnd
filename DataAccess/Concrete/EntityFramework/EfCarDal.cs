@@ -1,5 +1,8 @@
-﻿using DataAccess.Abstract;
+﻿using Core.DataAccess;
+using Core.DataAccess.EntitiyFramework;
+using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,61 +12,32 @@ using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfCarDal : ICarDal
+    public class EfCarDal : EfEntityRepositoryBase<Car, RentACarContext>,ICarDal
     {
-        public void Add(Car entity)
-        {
-            using (RentACarContext context = new RentACarContext())
-            {
-                var addedEntity = context.Entry(entity);
-                addedEntity.State = EntityState.Added;
-                context.SaveChanges();
-            }
-        }
+        public List<CarDetailDto> GetCarDetails()
 
-        public void Delete(Car entity)
         {
             using (RentACarContext context = new RentACarContext())
             {
-                var deletededEntity = context.Entry(entity);
-                deletededEntity.State = EntityState.Deleted;
-                context.SaveChanges();
-            }
-        }
+                var result = from car in context.Cars
+                             join brand in context.Brands
+                             on car.BrandId equals brand.BrandId
+                             join color in context.Colors
+                             on car.ColorId equals color.ColorId
 
-        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
-        {
-            using (RentACarContext context = new RentACarContext())
-            {
-                return context.Cars.ToList();
+                             select new CarDetailDto
+                             {
+                                 CarId = car.CarId,
+                                 BrandName = brand.BrandName,
+                                 ColorName = color.ColorName,
+                                 DailyPrice = car.DailyPrice,
+                                 ColorId = car.ColorId,
+                                 BrandId = car.BrandId
+                             };
+                return result.ToList();
+                            
             }
         }
-
-        public Car GetCarsByBrandId(Expression<Func<Car, bool>> filter)
-        {
-            using (RentACarContext context = new RentACarContext())
-            {
-                return context.Set<Car>().SingleOrDefault(filter);
-            }
-        }
-
-        public Car GetCarsByColorsId(Expression<Func<Car, bool>> filter)
-        {
-            using (RentACarContext context = new RentACarContext())
-            {
-                return context.Set<Car>().SingleOrDefault(filter);
-            }
-                
-        }
-
-        public void Update(Car entity)
-        {
-            using (RentACarContext context = new RentACarContext())
-            {
-                var updatedEntity = context.Entry(entity);
-                updatedEntity.State = EntityState.Modified;
-                context.SaveChanges();
-            }
-        }
+            
     }
 }
