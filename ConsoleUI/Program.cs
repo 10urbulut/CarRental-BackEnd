@@ -27,7 +27,9 @@ namespace ConsoleUI
         {
             CarManager carManager = new CarManager(new EfCarDal());
             var result = carManager.GetCarByCarId(2);
-            Console.WriteLine(result.CarId+" / "+result.Description);
+
+            Console.WriteLine(result.Message);
+
         }
 
         private static void UpdateTest()
@@ -72,33 +74,21 @@ namespace ConsoleUI
         private static void GetCarsByColorIdTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarsByColorId(2))
-            {
-                Console.WriteLine(car.ColorId + " / " +
-                    car.Description + " / " + car.DailyPrice);
-            }
-            
-            
+
+
+
         }
 
         private static void GetCarsByBrandIdTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarsByBrandId(2))
-            {
-                Console.WriteLine(car.BrandId + " / " +
-                    car.Description + " / " + car.DailyPrice);
-            }
+
         }
 
         private static void GetCarDetailDtosTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarDetails())
-            {
-                Console.WriteLine(car.BrandName + " / " +
-                    car.ColorName + " / " + car.DailyPrice);
-            }
+
         }
     }
 }
