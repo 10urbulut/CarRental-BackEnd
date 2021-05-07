@@ -26,11 +26,8 @@ namespace ConsoleUI
         private static void GetCarByCarIdTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarByCarId(2))
-            {
-                Console.WriteLine(car.CarId + " / " +
-                    car.Description + " / " + car.DailyPrice);
-            }
+            var result = carManager.GetCarByCarId(2);
+            Console.WriteLine(result.CarId+" / "+result.Description);
         }
 
         private static void UpdateTest()

@@ -70,9 +70,9 @@ namespace Business.Concrete
             return _carDal.GetAll(c=>c.DailyPrice>=min && c.DailyPrice<=max);
         }
 
-        public List<Car> GetCarByCarId(int id)
+        public Car GetCarByCarId(int id)
         {
-            return _carDal.GetAll(c=>c.CarId==id);
+            return _carDal.Get(c=>c.CarId==id);
         }
     }
 }
