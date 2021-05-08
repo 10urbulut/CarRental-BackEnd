@@ -8,8 +8,8 @@ using System.Linq.Expressions;
 
 namespace Core.DataAccess.EntitiyFramework
 {
-    public class EfEntityRepositoryBase<TEntity,TContext>:IEntityRepository<TEntity>
-                  where TEntity:class,IEntity,new()
+    public class EfEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEntity>
+                  where TEntity : class, IEntity, new()
            where TContext : DbContext, new()
 
     {
@@ -35,9 +35,9 @@ namespace Core.DataAccess.EntitiyFramework
 
         public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
-            using (TContext context= new TContext())
+            using (TContext context = new TContext())
             {
-                return 
+                return
                     context.Set<TEntity>().SingleOrDefault(filter);
             }
         }
@@ -51,8 +51,6 @@ namespace Core.DataAccess.EntitiyFramework
                     : context.Set<TEntity>().Where(filter).ToList();
             }
         }
-
-        
 
         public TEntity GetCarsByBrandId(Expression<Func<TEntity, bool>> filter)
         {

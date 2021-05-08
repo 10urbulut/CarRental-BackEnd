@@ -19,8 +19,28 @@ namespace ConsoleUI
             //DeleteTest();
             //UpdateTest();
 
+            //EKRANA YAZMIYOR!!!
+            //GetRentalDetails();
 
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            foreach (var car in rentalManager.GetAll().Data)
+            {
+                Console.WriteLine(car.CarId+"/  "+car.RentDate + "/  "+car.ReturnDate);
+            } 
 
+        }
+
+        private static void GetRentalDetails()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            foreach (var rental in rentalManager.GetRentalDetails().Data)
+            {
+                Console.WriteLine(
+                    rental.BrandId +
+                    rental.BrandName +
+                    rental.ColorName +
+                    rental.FirstName);
+            }
         }
 
         private static void GetCarByCarIdTest()
@@ -29,6 +49,7 @@ namespace ConsoleUI
             var result = carManager.GetCarByCarId(2);
 
             Console.WriteLine(result.Message);
+            Console.WriteLine(result.Data.Description);
 
         }
 
@@ -75,7 +96,11 @@ namespace ConsoleUI
         {
             CarManager carManager = new CarManager(new EfCarDal());
 
-
+            //var result = carManager.GetCarsByColorId(2);
+            foreach (var car in carManager.GetCarsByColorId(2).Data)
+            {
+                Console.WriteLine(car.Description);
+            }
 
         }
 

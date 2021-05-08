@@ -13,6 +13,7 @@ namespace Business.Constants
         public static string ContentsListed = "İçerikler listelendi";
         public static string ContentDeleted = "İçerik silindi";
         public static string ContentUpdated = "İçerik güncellendi";
+        public static string CarReturnError = "Araç henüz dönmemiş!";
 
     }
 }
