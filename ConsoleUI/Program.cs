@@ -1,17 +1,22 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
+using Business.Constants;
+using Core.Results;
 using DataAccess.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ConsoleUI
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            //GetCarDetailDtosTest();
+           // GetCarDetailDtosTest();
             //GetCarsByBrandIdTest();
             //GetCarsByColorIdTest();
             //GetCarByCarIdTest();
@@ -20,27 +25,34 @@ namespace ConsoleUI
             //UpdateTest();
 
             //EKRANA YAZMIYOR!!!
-            //GetRentalDetails();
-
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            foreach (var car in rentalManager.GetAll().Data)
-            {
-                Console.WriteLine(car.CarId+"/  "+car.RentDate + "/  "+car.ReturnDate);
-            } 
+            GetRentalDetails();
+            //SenpaiTest();
+            //RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            //foreach (var car in rentalManager.GetAll().Data)
+            //{
+            //    Console.WriteLine(car.CarId+"/  "+car.RentDate + "/  "+car.ReturnDate);
+            //} 
 
         }
 
-        private static void GetRentalDetails()
+        private static void SenpaiTest()
         {
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            foreach (var rental in rentalManager.GetRentalDetails().Data)
+            CarManager car = new CarManager(new EfCarDal());
+            var hey = car.GetCarByCarId(1);
+            Console.WriteLine(hey.Data.Description+hey.Data.CarId);
+            Console.WriteLine(car.GetCarByCarId(1).Data.DailyPrice);
+        }
+
+        public static void GetRentalDetails()
+        {
+            RentalManager carManager = new RentalManager(new EfRentalDal());
+            var result = carManager.GetRentalDetails();
+            foreach (var car in result.Data)
             {
-                Console.WriteLine(
-                    rental.BrandId +
-                    rental.BrandName +
-                    rental.ColorName +
-                    rental.FirstName);
+                Console.WriteLine(car.FirstName + " / " + car.LastName);
             }
+            Console.WriteLine(result.Success);
+
         }
 
         private static void GetCarByCarIdTest()
@@ -113,7 +125,12 @@ namespace ConsoleUI
         private static void GetCarDetailDtosTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-
+            var result = carManager.GetCarDetails();
+            foreach (var car in result.Data)
+            {
+                Console.WriteLine(car.BrandName+ " / " + car.ColorName);
+            }
+            Console.WriteLine(result.Message);
         }
     }
 }

@@ -28,6 +28,18 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ContentDeleted);
         }
 
+        public IDataResult<List<Customer>> GetAll()
+        {
+            return new SuccessDataResult<List<Customer>>
+                (_customerDal.GetAll(), Messages.ContentsListed);
+        }
+
+        public IDataResult<Customer> GetByCustomerId(int id)
+        {
+            return new SuccessDataResult<Customer>
+                (_customerDal.Get(c => c.CustomerId == id), Messages.ContentsListed);
+        }
+
         public IResult Update(Customer customer)
         {
             _customerDal.Update(customer);

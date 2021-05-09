@@ -34,7 +34,7 @@ namespace WebAPI.Controllers
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
-            var result = _carService.GetCarByCarId(id);
+            var result = _carService.GetCarByCarId( id);
             if (result.Success)
             {
                 return Ok(result);
