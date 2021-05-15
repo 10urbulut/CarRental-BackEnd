@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -18,6 +20,7 @@ namespace Business.Concrete
             _colordal = colordal;
         }
 
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult Add(Color color)
         {
             _colordal.Add(color);
@@ -41,6 +44,7 @@ namespace Business.Concrete
                 (_colordal.Get(c => c.ColorId == id), Messages.ContentsListed);
         }
 
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult Update(Color color)
         {
             _colordal.Update(color);
