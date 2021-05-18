@@ -15,5 +15,8 @@ namespace Business.Constants
         public static string ContentUpdated = "İçerik güncellendi";
         public static string CarReturnError = "Araç henüz dönmemiş!";
 
+        public static string CarCanHaveFiveImagesAtMost = "You can put up to five images ";
+
+        public static string IdNotFound =" ID does not register ";
     }
 }
