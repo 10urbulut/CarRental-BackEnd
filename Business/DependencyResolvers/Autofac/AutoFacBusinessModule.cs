@@ -9,6 +9,8 @@ using Core.Utilities.Interceptors;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Http;
+using Core.Utilities.Security.JWT;
 
 namespace Business.DependencyResolvers.Autofac
 {
@@ -37,6 +39,12 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<CarImageManager>().As<ICarImageService>().SingleInstance();
             builder.RegisterType<EfCarImageDal>().As<ICarImageDal>().SingleInstance();
+
+            builder.RegisterType<AuthManager>().As<IAuthService>();
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>();
+
+            builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>();
+
 
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();

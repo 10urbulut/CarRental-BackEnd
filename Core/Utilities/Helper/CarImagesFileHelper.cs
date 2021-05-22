@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using Core.Results;
+using Core.Utilities.Results;
 
 namespace Core.Utilities.FileManager
 {

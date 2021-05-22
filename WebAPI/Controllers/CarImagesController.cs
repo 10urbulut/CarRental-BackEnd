@@ -1,5 +1,5 @@
 ﻿using Business.Abstract;
-using Core.Results;
+using Core.Utilities.Results;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

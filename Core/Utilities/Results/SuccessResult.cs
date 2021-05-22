@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Results
+namespace Core.Utilities.Results
 {
     public class SuccessResult:Result
     //base inherit edilen sınıfa veri göndermemiz için
